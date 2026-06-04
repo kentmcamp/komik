@@ -1,0 +1,239 @@
+import { useEffect, useState } from 'react';
+import { supabase } from './utils/supabase';
+import type { Series, Issue, Page } from './types/database.types';
+
+function App() {
+  const [seriesList, setSeriesList] = useState<Series[]>([]);
+  const [issuesList, setIssuesList] = useState<Issue[]>([]);
+  const [pagesList, setPagesList] = useState<Page[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function getRawData() {
+      const resSeries = await supabase.from('Series').select('*');
+      if (resSeries.data) setSeriesList(resSeries.data);
+
+      const resIssues = await supabase.from('Issue').select('*');
+      if (resIssues.data) setIssuesList(resIssues.data);
+
+      const resPages = await supabase.from('Page').select('*');
+      if (resPages.data) setPagesList(resPages.data);
+
+      setLoading(false);
+    }
+    getRawData();
+  }, []);
+
+  if (loading) return <div>Loading Data Tables...</div>;
+
+  return (
+    <div>
+      <h1>Comic Library Data Dump</h1>
+
+      {seriesList.map(series => (
+        <div key={series.id}>
+          <h2>Series: {series.title}</h2>
+          <p>Description: {series.description}</p>
+          <img src={series.banner_image_url || ''} alt="banner"/>
+
+          {issuesList
+            .filter(issue => issue.series_id === series.id)
+            .map(issue => (
+              <div key={issue.id}>
+                <h3>Issue #{issue.issue_number}: {issue.title}</h3>
+                <img src={issue.cover_image_url}/>
+
+                <div>
+                  {pagesList
+                    .filter(page => page.issue_id === issue.id)
+                    .map(page => (
+                      <div key={page.id}>
+                        <p>Pg {page.page_number}</p>
+                        <img src={page.image_url}/>
+                      </div>
+                    ))}
+                </div>
+              </div>
+            ))}
+          <hr/>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export default App;
+
+
+
+---
+.issue-card-link {
+  display: block;
+  text-decoration: none;
+  width: 15em;
+  margin: 1em;
+}
+
+.issue-card {
+  position: relative;
+  background: rgba(19, 19, 19, 0.3);
+  border: 1px solid rgba(0, 229, 255, 0.15);
+  padding: 4px;
+}
+
+
+/* Perfect alignment of the corner brackets on a 1px border */
+.issue-card::before,
+.issue-card::after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-color: #00e5ff;
+  border-style: solid;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.issue-card::before {
+  top: -1px;
+  left: -1px;
+  border-width: 2px 0 0 2px;
+}
+
+.issue-card::after {
+  bottom: -1px;
+  right: -1px;
+  border-width: 0 2px 2px 0;
+}
+
+.issue-card-image {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.issue-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.issue-meta-tag {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-size: 8px;
+  color: #00e5ff;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 2px 4px;
+}
+
+.issue-card-body {
+  padding: 8px 8px 6px 12px; /* Increased padding on the left to make room for the border */
+
+  /* 1. Added a solid cyan left accent border line */
+  border-left: 2px solid #00e5ff;
+
+  /* 2. Added a dark, translucent top-to-bottom background gradient */
+  background: linear-gradient(90deg, rgba(3, 37, 71, 0.5) 0%, rgba(10, 12, 14, 0.98) 100%);
+}
+
+.issue-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.issue-divider-line {
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.08);
+  width: 100%;
+  margin-top: 2px;
+  margin-bottom: 8px;
+}
+
+.issue-title {
+  margin: 0;
+  font-size: 13px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-h);
+}
+
+.issue-status-active {
+  font-size: 9px;
+  color: #00e5ff;
+}
+
+.issue-card-info {
+  font-size: 10px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 12px;
+}
+
+.issue-status {
+  display: block;
+  font-size: 9px;
+  opacity: 0.6;
+  margin-bottom: 2px;
+}
+
+.issue-description {
+  margin: 0;
+  line-height: 1.3;
+}
+
+.issue-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 9px;
+  text-transform: uppercase;
+}
+
+.issue-date {
+  opacity: 0.5;
+}
+
+.issue-read {
+  color: #00e5ff;
+  letter-spacing: 0.1em;
+}
+
+
+
+---
+<Link to={`/reader/${issue.id}`} className="issue-card-link">
+  <div className="issue-card">
+    <div className="issue-card-image">
+      <img src={issue.cover_image_url} alt={issue.title} />
+      <div className="issue-meta-tag">ISS_{issue.issue_number}</div>
+    </div>
+
+    <div className="issue-card-body">
+      <div className="issue-card-header">
+        <h3 className="issue-title">{issue.title}</h3>
+        <span className="issue-status-active">[ACTIVE]</span>
+      </div>
+
+      {/* The new separating divider line between header and info */}
+      <div className="issue-divider-line"></div>
+
+      <div className="issue-card-info">
+        <span className="issue-status">CORE:</span>
+        <p className="issue-description">{issue.description ?? "No description"}</p>
+      </div>
+
+      <div className="issue-card-footer">
+        <span className="issue-date">{issue.date}</span>
+        <span className="issue-read">READ_DATA</span>
+      </div>
+    </div>
+  </div>
+</Link>

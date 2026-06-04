@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&family=Geo:ital@0;1&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+:root {
+    --text: #ced1d3;
+    --text-h: #f3f4f5;
+    --bg: #16171d;
+    --bg-card: rgba(30, 33, 36, 0.5);
+    --bg-card-hover: rgba(30, 33, 36, 1);
+    --accent: rgba(100, 175, 225, 1);
+    --accent-fade: rgba(100, 175, 225, 0.5);
+    /* --text: #16171d;
+    --text-h: #0c0c0c;
+    --bg: #ced1d3;
+    --accent: #00E5FF; */
+
+  --sans:"Inter", sans-serif;
+  --serif: "Arvo", serif;
+  --mono: "Geo", monospace;
+
+  --transition-speed: 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  --accent-glow: 0 0 10px rgba(100, 175, 225, 0.15);
+
+
+  --card-padding: 16px;
+  --inner-gap: 6px;
+  --img-scale: scale(1.03);
+
+  font: 16px/145% var(--sans);
+  letter-spacing: 0.16px;
+  color-scheme: light dark;
+  color: var(--text);
+  background: var(--bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  @media (max-width: 1024px) {
+    font-size: 16px;
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* @media (prefers-color-scheme: dark) {
+  :root {
+    --text: #ced1d3;
+    --text-h: #f3f4f5;
+    --bg: #16171d;
+    --accent: #00E5FF;
+  }
+} */
