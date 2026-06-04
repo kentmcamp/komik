@@ -6,42 +6,43 @@ import './ReaderPage.css';
 
 
 export default function ReaderPage() {
-  const { issueId } = useParams<{ issueId: string }>();
+  const { seriesSlug, issueNumber } = useParams<{ seriesSlug: string; issueNumber: string }>();
   const [issue, setIssue] = useState<Issue | null>(null);
   const [pages, setPages] = useState<Page[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchReaderData() {
-      if (!issueId) return;
+      if (!seriesSlug || !issueNumber) return;
 
-      // 1. Fetch the issue to get the cover image
+      // 1. Fetch the issue by matching both series slug and issue number
       const resIssue = await supabase
         .from('Issue')
-        .select('*')
-        .eq('id', issueId)
+        .select('*, Series!inner(slug)')
+        .eq('issue_number', issueNumber)
+        .eq('Series.slug', seriesSlug)
         .single();
 
       if (resIssue.data) {
-        setIssue(resIssue.data);
-      }
+        setIssue(resIssue.data as Issue);
 
-      // 2. Fetch all pages for the issue
-      const resPages = await supabase
-        .from('Page')
-        .select('*')
-        .eq('issue_id', issueId);
+        // 2. Fetch all pages for the issue using its ID
+        const resPages = await supabase
+          .from('Page')
+          .select('*')
+          .eq('issue_id', resIssue.data.id);
 
-      if (resPages.data) {
-        const sortedPages = resPages.data.sort((a, b) => a.page_number - b.page_number);
-        setPages(sortedPages);
+        if (resPages.data) {
+          const sortedPages = resPages.data.sort((a, b) => a.page_number - b.page_number);
+          setPages(sortedPages);
+        }
       }
 
       setLoading(false);
     }
 
     fetchReaderData();
-  }, [issueId]);
+  }, [seriesSlug, issueNumber]);
 
   if (loading) return <div>Loading Pages...</div>;
 

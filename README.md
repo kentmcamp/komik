@@ -34,6 +34,7 @@ The project is in an **early prototype** phase. Core systems for UI/UX and data 
   2. Series selector menu
   3. Search
   4. About/Updates
+* Visual customizing of series pages and the issue card component. Things like colors, fonts, borders, background, etc.
 
 ## Tech Stack
 - **Framework:** [React](https://reactjs.org/)

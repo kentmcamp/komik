@@ -4,12 +4,13 @@ import "./IssueCard.css";
 
 interface IssueCardProps {
   issue: Issue;
+  seriesSlug: string;
   pageCount: number;
 }
 
-export default function IssueCard({ issue, pageCount }: IssueCardProps) {
+export default function IssueCard({ issue, seriesSlug, pageCount }: IssueCardProps) {
   return (
-<Link to={`/reader/${issue.id}`} className="issue-card-link">
+<Link to={`/reader/${seriesSlug}/${issue.issue_number}`} className="issue-card-link">
   <div className="issue-card-container">
 
 

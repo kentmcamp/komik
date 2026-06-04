@@ -58,7 +58,7 @@ export default function SeriesPage() {
       {/* <img src={series.banner_image_url || ''} alt="banner"/> */}
 
       {issues.map(issue => (
-        <IssueCard key={issue.id} issue={issue} pageCount={issue.page_count + 1} />
+        <IssueCard key={issue.id} issue={issue} seriesSlug={series.slug} pageCount={issue.page_count + 1} />
       ))}
 
 
