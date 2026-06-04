@@ -1,73 +1,47 @@
-# React + TypeScript + Vite
+# Komik Reader
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A lightweight, web-based platform to easily publish webcomics, built with React, TypeScript, and Vite.
 
-Currently, two official plugins are available:
+## Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+KomikReader is designed to provide a focused and efficient reading experience. As of the current version, the app handles basic webcomic organization and presentation.
 
-## React Compiler
+### Current Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+As of right now, this is still an early prototype build. Basic fundamental systems are still under development, mainly those focusing on UI/UX and presentation. All assets are being hosted on a database and just being fetched and displayed in this app. This includes features like...
 
-## Expanding the ESLint configuration
+* Component for Series Cards to be displayed on the HomePage.
+* A carosel of banner images of recently uploaded/updated series for the HomePage header.
+The project is in an **early prototype** phase. Core systems for UI/UX and data presentation are actively under development.
+* The SeriesPage will be styled with a banner image up top with styled metadata text.
+* Buttons on/under the banner for "Read Latest Issue" and "Start From Issue One".
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Features Implemented
+- **Home Page:** Series card components and a featured banner carousel for recently updated titles.
+- **Series Page:** Metadata display with banner art and "Quick Start" navigation (Read Latest / Start from Issue One).
+- **Reader Page:** Interactive comic viewer with integrated navigation controls (Next/Prev Issue).
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Roadmap / Planned Features
+- **Snap Zoom:** Double-click/tap toggle for mobile-friendly reading.
+- **Act Containers:** Support for grouping issues into Chapters or Acts.
+- **Dynamic Header:** A vanishing top-bar with search, series selector, and navigation links.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Planned Features
+* A snap zoom toggle that works via double clicking/double tapping on a page in the reader.
+* An "Act" container for series that are big enough to break their issues into acts/chapters/etc.
+* A vanishing header (only displays on top and when scrolling up) that has links for...
+  1. Back to HomePage
+  2. Series selector menu
+  3. Search
+  4. About/Updates
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Tech Stack
+- **Framework:** [React](https://reactjs.org/)
+- **Language:** [TypeScript](https://www.typescriptlang.org/)
+- **Build Tool:** [Vite](https://vitejs.dev/)
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Author
+**Kent** - [Your GitHub Profile](https://github.com/your-username)
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## License
+This project is licensed under the MIT License - see the LICENSE file for details.
