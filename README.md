@@ -41,7 +41,7 @@ The project is in an **early prototype** phase. Core systems for UI/UX and data 
 - **Build Tool:** [Vite](https://vitejs.dev/)
 
 ## Author
-**Kent** - [Your GitHub Profile](https://github.com/your-username)
+**Kent** - [GitHub Profile](https://github.com/kentmcamp)
 
 ## License
 This project is licensed under the MIT License - see the LICENSE file for details.
