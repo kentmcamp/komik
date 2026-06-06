@@ -8,6 +8,8 @@
     --bg-card-hover: rgba(30, 33, 36, 1);
     --accent: rgba(100, 175, 225, 1);
     --accent-fade: rgba(100, 175, 225, 0.5);
+    --accent-gradient: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, var(--bg) 100%);
+
     /* --text: #16171d;
     --text-h: #0c0c0c;
     --bg: #ced1d3;
@@ -19,7 +21,7 @@
 
   --transition-speed: 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   --accent-glow: 0 0 10px rgba(100, 175, 225, 0.15);
-
+  --shadow: 0 2px 10px rgb(15,15,15,0.8);
 
   --card-padding: 16px;
   --inner-gap: 6px;

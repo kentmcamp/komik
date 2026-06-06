@@ -55,6 +55,8 @@ export default function ReaderPage() {
             src={issue.cover_image_url}
             alt="Cover Page"
             style={{ width: '100vw' }}
+            loading="lazy"
+            decoding="async"
           />
         </div>
       )}
@@ -65,6 +67,8 @@ export default function ReaderPage() {
           <img
             src={page.image_url}
             alt={`Page ${page.page_number}`}
+            loading="lazy"
+            decoding="async"
           />
         </div>
       ))}

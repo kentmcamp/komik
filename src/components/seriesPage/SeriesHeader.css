@@ -1,0 +1,110 @@
+.series-header-container {
+        position: relative;
+    width: 100%;
+    color: white;
+    background-color: #121212; /* Matches common dark theme backgrounds */
+    margin-bottom: 2rem;
+    overflow: hidden;
+}
+
+.series-header-banner-container {
+    position: relative;
+    /* max-height: 20em; */
+        width: 100%;
+    height: 50vh; /* Hero height: 50% of viewport */
+    min-height: 350px;
+    max-height: 600px
+}
+
+.series-header-banner {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.series-header-fade-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60%;
+    background: var(--accent-gradient);
+    /* Fades from transparent to the background color of the page */
+    /* background: linear-gradient(to bottom, rgba(18, 18, 18, 0) 0%, rgba(18, 18, 18, 1) 100%); */
+}
+
+.series-header-content {
+    padding: 0;
+    z-index: 2;
+    flex: 1 1 400px;
+}
+
+.series-header-title {
+    font-size: 2em;
+    font-family: var(--serif);
+    margin: 0;
+    letter-spacing: 3px;
+    font-weight: 800;
+    text-shadow: var(--shadow);
+
+}
+
+.series-header-divider {
+    height: .25em;
+    width: 100%;
+    background-color: var(--accent);
+    margin: 25px 0;
+}
+
+.series-header-description {
+    max-width: 700px;
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin: 0;
+    opacity: 0.9;
+    text-shadow: var(--shadow);
+}
+
+.banner-content-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 3;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; /* Allows elements to wrap when space is tight */
+    justify-content: space-between;
+    align-items: flex-end; /* Aligns text and buttons to the bottom */
+    gap: 2rem;
+    padding: 3rem 2rem; /* Added bottom padding to lift content from the edge */
+    box-sizing: border-box;
+}
+.button-container {
+    display: flex;
+    flex-direction: column; /* Stacks buttons vertically on large screens */
+    gap: 1rem;
+    flex: 0 0 auto;
+    min-width: 200px;
+}
+/* Responsive breakpoint for smaller screens */
+@media (max-width: 768px) {
+    .banner-content-container {
+        padding: 2rem 1.5rem;
+        gap: 1.5rem;
+    }
+    .series-header-content {
+        flex-basis: 100%; /* Force text to take full width when wrapped */
+    }
+
+    .button-container {
+        flex-direction: row; /* Switch buttons to side-by-side layout */
+        width: 100%;
+        justify-content: center; /* Center buttons horizontally on mobile */
+    }
+
+    .button-container > * {
+        flex: 1; /* Allows buttons to grow equally to fill the row on mobile */
+    }
+}

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import type { Issue } from "../types/database.types";
+import type { Issue } from "../../types/database.types";
 import "./IssueCard.css";
 
 interface IssueCardProps {

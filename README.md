@@ -35,6 +35,8 @@ The project is in an **early prototype** phase. Core systems for UI/UX and data 
   3. Search
   4. About/Updates
 * Visual customizing of series pages and the issue card component. Things like colors, fonts, borders, background, etc.
+* Toggle to change the reader from displaying vertical scrolling view to a 1 page at a time, click/swipe to progress.
+
 
 ## Tech Stack
 - **Framework:** [React](https://reactjs.org/)
